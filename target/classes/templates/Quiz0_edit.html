@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Create/Update Form</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
+</head>
+<body>
+
+
+<div class="d-flex justify-content-center">
+  <td><img th:src="@{https://bdassignment1.blob.core.windows.net/test1/curls.jpg}"
+           alt="" border="3" height="100" width="100" /></td>
+</div>
+<div class="d-flex justify-content-center">
+  <p class="h1">Manideep Shanigaram - 4224</p>
+</div>
+
+
+<br>
+<br>
+<hr>
+<br>
+<br>
+
+<div class="container">
+  <div class="row">
+    <div class="d-flex justify-content-center">
+      <h1 class="text-center">Update Person Details</h1>
+      <div class = "card-body">
+        <form th:action="@{/update_quiz0/{id}(id=${person.pid})}" th:object="${person}" method = "post">
+          <div class="form-group">
+            <label>Name</label>
+            <input class="form-control" type = "number" name="num" th:field="*{num}"/>
+          </div>
+          <div class="form-group">
+            <label>Class</label>
+            <input class="form-control" type = "text" name="name" th:field="*{name}" readonly/>
+          </div>
+          <div class="form-group">
+            <label>Salary</label>
+            <input class="form-control" type = "number" name="year" th:field="*{year}" readonly/>
+          </div>
+          <div class="form-group">
+            <label>picture</label>
+            <input class="form-control" type = "text" name="picture" th:field="*{picture}" readonly/>
+          </div>
+          <div class="form-group">
+            <label>comment</label>
+            <input class="form-control" type = "text" name="comments" th:field="*{comments}"/>
+          </div>
+          <div class="box-footer">
+            <button type="submit" class="btn btn-primary">Update</button>
+          </div>
+        </form>
+
+      </div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>Home</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+          crossorigin="anonymous">
+</head>
+<body>
+
+
+
+
+<!--<div class="d-flex justify-content-center" th:unless="${#lists.isEmpty(persons)}">-->
+<div><h1 >List People</h1></div>
+<!--Section to Add new people to List-->
+<br/>
+<div class="d-flex justify-content-center">
+    <form th:action="@{/upload}" method="post" enctype="multipart/form-data">
+        <input type="file" name="file" id="file" />
+        <input type="submit" value="Upload" />
+    </form>
+</div>
+
+<div class = "row">
+    <div class = "col-lg-3">
+        <a th:href = "@{/newForm}" class="btn btn-primary">Add New Person</a>
+    </div>
+</div>
+<br/>
+<hr/>
+<br/>
+
+<div class="d-flex justify-content-center">
+
+    <br/>
+
+    <table class="table table-hover">
+        <tr>
+            <th>Image</th>
+            <th>Name</th>
+            <th>State</th>
+            <th>Salary</th>
+            <th>Grade</th>
+            <th>Room</th>
+            <th>Telum</th>
+            <th>Picture</th>
+            <th>Keywords</th>
+            <th>Actions</th>
+        </tr>
+        <tr th:each="person : ${persons}">
+
+            <td><img th:src="${person.imageUrl}"
+                     alt="" border="3" height="100" width="100" /></td>
+            <td th:text="${person.name}"></td>
+            <td th:text="${person.state}"></td>
+            <td th:text="${person.salary}"></td>
+            <td th:text="${person.grade}"></td>
+            <td th:text="${person.room}"></td>
+            <td th:text="${person.telnum}"></td>
+            <td th:text="${person.picture}"></td>
+            <td th:text="${person.keywords}"></td>
+            <td>
+                <a th:href="@{updateForm/{id}(id=${person.pid})}"
+                   class="btn btn-primary">Update</a>
+                <a th:href="@{deletePerson/{id}(id=${person.pid})}"
+                   class="btn btn-danger">Delete</a>
+            </td>
+        </tr>
+    </table>
+</div>
+
+
+<br/>
+<hr/>
+<br/>
+
+<!--Section to delete all people from db.-->
+<div class="d-flex justify-content-center">
+    <form class="form-group" th:action="@{/delete-people}" method="get">
+        <input type="submit" value="Click here to Delete all people..."/>
+    </form>
+</div>
+
+<br/>
+<hr/>
+<br/>
+<div class="d-flex justify-content-center">
+    <p>Search anything on fields Name, State, Keywords:</p>
+    <form class="form-group" th:action="@{/search}" th:object="${person}" method="get">
+        <label>Enter your Query:</label>
+        <input type="text" th:field="*{keywords}" placeholder="John"/>
+        <input type="submit" value="Search"/>
+    </form>
+</div>
+<hr/>
+<br/>
+<div class="d-flex justify-content-center">
+    <p>Want to Execute a Query? Try here: </p>
+    <form class="form-group" th:action="@{/queryDB}" th:object="${person}" method="get">
+        <label>Enter your Query:</label>
+        <input type="text" th:field="*{name}" placeholder="{ 'name': 'Tavo' }"/>
+        <input type="submit" value="Query"/>
+    </form>
+</div>
+
+<div class="d-flex justify-content-center">
+
+    <br/>
+    <div class="d-flex justify-content-center" >
+<!--    th:unless="${#lists.isEmpty(queryResponse)}"     -->
+        <table class="table table-hover">
+            <tr>
+                <th>Image</th>
+                <th>Name</th>
+                <th>State</th>
+                <th>Salary</th>
+                <th>Grade</th>
+                <th>Room</th>
+                <th>Telum</th>
+                <th>Picture</th>
+                <th>Keywords</th>
+            </tr>
+            <tr th:each="person : ${queryResponse}">
+
+                <td><img th:src="${person.imageUrl}"
+                         alt="" border="3" height="100" width="100" /></td>
+                <td th:text="${person.name}"></td>
+                <td th:text="${person.state}"></td>
+                <td th:text="${person.salary}"></td>
+                <td th:text="${person.grade}"></td>
+                <td th:text="${person.room}"></td>
+                <td th:text="${person.telnum}"></td>
+                <td th:text="${person.picture}"></td>
+                <td th:text="${person.keywords}"></td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+
+</body>
+</html>
