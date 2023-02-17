@@ -11,8 +11,6 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-//@Entity
-//@Table
 @Document
 public class People {
 
